@@ -18,6 +18,7 @@ with open('graph3.net') as f:
         if(i == 2):
             root, adj = line.split()
             root = node(root, blank_list)
+            adj = node(adj, blank_list)
             graph.append(root)
             graph[0].adj_list.append(adj)
     for line in f:
@@ -41,10 +42,7 @@ with open('graph3.net') as f:
         if root_status == False:  # root not in graph yet
             root = node(root, blank_list)
             graph.append(root)
-            # print(adj)
-            tmp_adj = adj
-            for k in range(len(graph)-1):  # check if adjacent node in graph too
-                # print(tmp_adj)
+            for k in range(len(graph)-1):  # check if adjacent node is in graph too
                 if adj == graph[k].id:  # if adj node in graph already
                     adj_status = True
                     # append adj node to root node list
@@ -53,4 +51,6 @@ with open('graph3.net') as f:
             if adj_status == False:  # if adjacent node not already in graph
                 adj = node(adj, blank_list)
                 root.adj_list.append(adj)
-print(graph[0].adj_list[0].id)
+                graph.append(adj)
+
+print(graph[0].adj_list[0])
