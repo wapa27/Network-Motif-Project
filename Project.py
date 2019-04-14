@@ -1,4 +1,4 @@
-from array import *
+# naive read-in. Need to clean this up. Just wanted to get something together.
 
 
 class node:
@@ -53,4 +53,4 @@ with open('graph3.net') as f:
                 root.adj_list.append(adj)
                 graph.append(adj)
 
-print(graph[0].adj_list[0])
+print(graph[0].adj_list[0].id)  # should index 0 of first node's adj list
