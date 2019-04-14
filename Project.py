@@ -1,4 +1,5 @@
 # naive read-in. Need to clean this up. Just wanted to get something together.
+# let's put the read-in into a function, and we need to take .net file as input arg.
 
 
 class node:
