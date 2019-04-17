@@ -51,8 +51,7 @@ def main():
                 graph.append(root)
                 for k in range(len(graph)):  # check if adjacent node is in graph too
                     if adj == graph[k].id:  # if adj node in graph already
-                        adj_status = True
-                        # append adj node to root node list
+                        adj_status = True   # append adj node to root node list
                         graph[j].adj_list.append(graph[k])
                         graph[k].adj_list.append(graph[j])
 
@@ -61,13 +60,6 @@ def main():
                     root.adj_list.append(adj)
                     adj.adj_list.append(root)
                     graph.append(adj)
-    count = 0
-    tmp = []
-    # quick test (printing count of edges --> given at top of .net file)
-    for x in range(0, len(graph)):
-        if graph[x].id not in tmp:
-            tmp.append(graph[x])
-    print(len(graph))
 
 
 main()
