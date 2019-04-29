@@ -1,0 +1,4 @@
+*vertices 3
+*edges 2
+1 2
+2 3
