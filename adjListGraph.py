@@ -1,6 +1,24 @@
 # Good to go
 import sys
-from subgraphInstances import *
+# from subgraphInstances import *
+
+
+def FindSubgraphInstances(G, H):
+    instances = []
+
+    # sortByDegree(G)
+    sortByDegree(H)
+
+
+# def findAutomorphisms(H):
+
+
+def sortByDegree(graph):
+    for node in graph.nodeList:
+        node.degree = len(node.adj_list)
+    G_clone = sorted(graph.nodeList, key=lambda x: x.degree, reverse=True)
+    for node in G_clone:
+        print(node.id, node.adj_list, node.degree)
 
 
 class Node:
