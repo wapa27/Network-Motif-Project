@@ -1,11 +1,13 @@
 # Good to go
 import sys
+from subgraphInstances import *
 
 
 class Node:
-    def __init__(self, id, adj_list):
+    def __init__(self, id, adj_list, degree):
         self.id = id
         self.adj_list = adj_list
+        self.degree = 0
 
     def AddAdj(self, connection):
         isConnected = self.FindAdj(connection)
@@ -26,7 +28,7 @@ class Graph:
     def AddNode(self, node):
         nodeFind = self.FindNode(node)
         if(nodeFind == None):  # if node not already in graph
-            nodeNew = Node(node, [])  # create the node
+            nodeNew = Node(node, [], 0)  # create the node
             self.nodeList.append(nodeNew)  # add the node to graph
             return nodeNew
         return nodeFind
@@ -48,6 +50,11 @@ class Graph:
         # go thorugh node adjList to find nodes to detatch
         # remoce query node from graph
 
+    def swapNodes(self, H, node1, node2):
+        temp = node1.copy()
+        node1.id = node2.id
+        node2.id = temp.id
+
 
 def LoadGraph(fileName):
     graph = Graph([])  # build graph
@@ -66,4 +73,6 @@ def LoadGraph(fileName):
 
 
 graph = LoadGraph(sys.argv[1])
-print(len(graph.nodeList))
+# print(len(graph.nodeList))
+subgraph = LoadGraph(sys.argv[2])
+FindSubgraphInstances(graph, subgraph)
