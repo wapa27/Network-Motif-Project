@@ -6,9 +6,6 @@ import sys
 def FindSubgraphInstances(G, H):
     instances = []
 
-    # sortByDegree(G)
-    sortByDegree(H)
-
 
 # def findAutomorphisms(H):
 
@@ -17,8 +14,9 @@ def sortByDegree(graph):
     for node in graph.nodeList:
         node.degree = len(node.adj_list)
     G_clone = sorted(graph.nodeList, key=lambda x: x.degree, reverse=True)
-    for node in G_clone:
-        print(node.id, node.adj_list, node.degree)
+    # for node in G_clone:
+    #     print(node.id, node.adj_list, node.degree)
+    return G_clone
 
 
 class Node:
@@ -93,4 +91,7 @@ def LoadGraph(fileName):
 graph = LoadGraph(sys.argv[1])
 # print(len(graph.nodeList))
 subgraph = LoadGraph(sys.argv[2])
-FindSubgraphInstances(graph, subgraph)
+G = sortByDegree(graph)
+H = sortByDegree(subgraph)
+
+FindSubgraphInstances(G, H)
