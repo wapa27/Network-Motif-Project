@@ -3,31 +3,23 @@ from adjListGraph import *
 
 def compatible(G, H, toTry, possMatch):
 	hPrime = Graph([])
-	newMatch = possMatch
-	newMatch[0].append(toTry) # toTry is a string of node ID
-	#print(len(newMatch)-1)
-	#if (len(newMatch[1])>1):
-	newMatch[1].append(H.nodeList[len(newMatch[0])-1]) #len(possMatch)-1 is index of h
+	newMatch = [[],[]]
+	for i in range(len(possMatch[0])):
+		newMatch[0].append(possMatch[0][i])
+		newMatch[1].append(possMatch[1][i])
+	newMatch[0].append(toTry)
+	newMatch[1].append(H.nodeList[len(newMatch[0])-1].id) #len(possMatch)-1 is index of h
+	print(newMatch[1])
+	print(newMatch[0])
+	
 	for i in range(len(newMatch[1])): #index of node IDs in G
-		hPrime.nodeList.append(newMatch[1][i])
+		hPrime.nodeList.append(H.nodeList[i])
 	hPrime.PrintGraph()
-	print("---")
-	# for i in range(len(hPrime.nodeList)):
-	# 	hPrime.nodeList[i].id = newMatch[0][i].id
-	# 	print("here")
-	# 	print(hPrime.nodeList[i].id)
-	#print("----")
-	#print(newMatch[0])
-	#for n in hPrime:
-
-
-
 
 def recursiveSearch(G,H,g,possMatch,IsomorphList):
-	print("g.id =" + g.id)
-	#print(g.id + "adj_list is " + g.adj_list)
+	print("g.id = " + g.id)
 	for n in g.adj_list:
-		print("node =" + n)
+		print("node = " + n)
 		possAdd = compatible(G, H, n, possMatch)
 		if (possAdd != None):
 			if len(possAdd) == len(H.nodeList):
@@ -41,7 +33,7 @@ def IsomorphicExtentions(G,H,g):
 	IsomorphList = [] # number of found subgraphs from node g
 		#print(current.id)
 		#G:graph, H:motif, current: node object of int n, g,h[0]: suppose g and h[0] are compatible, IsomorphList: record completed maps
-	toopy = ([g],[H.nodeList[0]])
+	toopy = [[g.id],[H.nodeList[0].id]]
 	hold = recursiveSearch(G,H,g,toopy,IsomorphList)
 	return IsomorphList
 
@@ -75,6 +67,7 @@ if __name__ == "__main__":
 	
 	G.PrintGraph()
 	H.PrintGraph()
+	print("--------")
 	FindSubgraphInstances(G,H)
 
 
