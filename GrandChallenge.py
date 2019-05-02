@@ -29,7 +29,6 @@ def compatible(G, H, toTry, possMatch):
 
 	#replace nodes in hPrime with mapping from newMatch[0]
 	for n in range(len(hPrime.nodeList)): #loop thru hPrime's nodeList
-		
 		check = hPrime.nodeList[n]
 		for m in range(len(newMatch[1])): #loop the newMatch[1] list
 			if check.id == newMatch[1][m]: #if node in hPrime has same ID as node in newMatch[1]
@@ -57,7 +56,6 @@ def compatible(G, H, toTry, possMatch):
 		return None
 
 def recursiveSearch(G,H,g,possMatch,IsomorphList):
-	print("g.id = " + g.id)
 	for n in g.adj_list:
 		possAdd = compatible(G, H, n, possMatch)
 		if (possAdd != None):
@@ -85,10 +83,15 @@ def FindSubgraphInstances(G,H):
 
 
 if __name__ == "__main__":
-	graph = LoadGraph("trinetwork.txt")
+	graph = LoadGraph("graph3.net")
 	# print(len(graph.nodeList))
-	subgraph = LoadGraph("trimotif.txt")
+	subgraph = LoadGraph("xmotif.txt")
 	G = sortByDegree(graph)
 	H = sortByDegree(subgraph)
+
+	print("Graph: ")
+	G.PrintGraph()
+	print("Motif: ")
+	H.PrintGraph()
 	
 	print(FindSubgraphInstances(G,H))
