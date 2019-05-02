@@ -73,19 +73,36 @@ def IsomorphicExtentions(G,H,g):
 	recursiveSearch(G,H,g,toopy,IsomorphList)
 	return IsomorphList
 
+def noRep(listy):
+	for f in range(len(listy)):
+		for s in range(len(listy)): 
+			if (s != f):
+				print("BUTTS")
+				print(listy[f][0])
+				print(listy[s][0])
+				if (sorted(listy[f]) == sorted(listy[s])):
+					listy.remove(listy[f])
+	return listy  
+
+
+
 def FindSubgraphInstances(G,H):
 	Instances = 0 # Final number of subgraphs
+	tList = []
 	for g in G.nodeList:
-		possMatch = [] ### do we need this?
-		Instances += len(IsomorphicExtentions(G,H,g))
-		#check for repetitions ?
+		tList += IsomorphicExtentions(G,H,g)
+		tList = noRep(tList)
+		print("tlist")
+		print(tList)
+	Instances += len(tList)
+	#check for repetitions
 	return Instances 
 
 
 if __name__ == "__main__":
-	graph = LoadGraph("graph3.net")
+	graph = LoadGraph("eznetwork.txt")
 	# print(len(graph.nodeList))
-	subgraph = LoadGraph("xmotif.txt")
+	subgraph = LoadGraph("ezmotif.txt")
 	G = sortByDegree(graph)
 	H = sortByDegree(subgraph)
 
