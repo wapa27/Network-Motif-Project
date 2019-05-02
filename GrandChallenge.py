@@ -74,14 +74,13 @@ def IsomorphicExtentions(G,H,g):
 	return IsomorphList
 
 def noRep(listy):
-	for f in range(len(listy)):
-		for s in range(len(listy)): 
+	for f in listy:
+		for s in listy: 
 			if (s != f):
-				print("BUTTS")
-				print(listy[f][0])
-				print(listy[s][0])
-				if (sorted(listy[f]) == sorted(listy[s])):
-					listy.remove(listy[f])
+				print(sorted(f[0]))
+				print(sorted(s[0]))
+				if (sorted(f[0]) == sorted(s[0])):
+					listy.remove(f)
 	return listy  
 
 
