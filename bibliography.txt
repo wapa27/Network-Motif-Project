@@ -1,0 +1,33 @@
+
+Bibliography
+Csima, Elizabeth. Determining If Two Graphs Are Isomorphic. University of Kentucky, 
+www.ms.uky.edu/~csima/ma111/GraphsLecture2.pdf. 
+	We used this lecture to help inform our algorithm’s ability to find and identify 
+	isomorphisms. 
+
+“Hamiltonian Cycle | Backtracking-6.” GeeksforGeeks, 4 Apr. 2019,
+www.geeksforgeeks.org/hamiltonian-cycle-backtracking-6/. 
+	We used this source to understand python implementation of hamiltonian cycles
+	so we could sort the nodes in our motif by hamiltonian path or
+	cycle (depending on the motif)
+
+Hartke, Stephen G, and A J Radcliffe. “McKay’s Canonical Graph Labeling Algorithm.”
+University of Michigan.
+	We used this thesis to find out more about McKay’s tools and their use because
+	McKay’s tools were mentioned in other resources. After learning more about their use
+	and practical applications, we decided not to use McKay’s tools in our algorithm. 
+
+Grochow, Joshua, and Manolis Kellis. “Network Motif Discovery Using Subgraph Enumeration
+and Symmetry-Breaking.” Computer Science and AI Laboratory, M.I.T.
+	We based the majority of our algorithm on the pseudocode and algorithm strategies
+	suggested in this thesis, along with questions answered by Grochow himself. The most
+	important thing we learned from this source is that symmetry-breaking is not required
+	for correctness. 
+
+mkrieger1. “‘Hamiltonian’ Path Using Python.” Stack Overflow, 27 Dec. 2017, 
+stackoverflow.com/questions/47982604/hamiltonian-path-using-python. 
+
+“Network Motif.” Wikipedia, Wikimedia Foundation, 14 Feb. 2019,
+en.wikipedia.org/wiki/Network_motif#Motif_Discovery_Algorithms. 
+	We used Wikipedia as our first resource to become familiar with network motif
+	finding strategies, existing algorithms, terminology, and the scope of the project. 
