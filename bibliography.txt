@@ -26,6 +26,7 @@ and Symmetry-Breaking.” Computer Science and AI Laboratory, M.I.T.
 
 mkrieger1. “‘Hamiltonian’ Path Using Python.” Stack Overflow, 27 Dec. 2017, 
 stackoverflow.com/questions/47982604/hamiltonian-path-using-python. 
+	We used code in a stack overflow response from mkrieger1 to find a hamiltonian 		path in our motif h. 
 
 “Network Motif.” Wikipedia, Wikimedia Foundation, 14 Feb. 2019,
 en.wikipedia.org/wiki/Network_motif#Motif_Discovery_Algorithms. 
