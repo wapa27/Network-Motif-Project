@@ -1,0 +1,8 @@
+*vertices 2
+*edges 1
+A B
+B A
+B C
+C B
+C A
+A C
