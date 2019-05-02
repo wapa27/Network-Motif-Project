@@ -12,6 +12,7 @@ def compatible(G, H, toTry, possMatch):
 	print("H: ")
 	H.PrintGraph()
 	hPrime = Graph([])
+	myNode = Node(0, [], 0)
 	newMatch = [[],[]]
 	#make a copy of possMatch using a for loop initialization
 	for i in range(len(possMatch[0])):
@@ -23,7 +24,13 @@ def compatible(G, H, toTry, possMatch):
 	#print(newMatch[0])
 	#make a copy of H using a for loop initialization
 	for i in range(len(newMatch[1])): #index of node IDs in G
-		hPrime.nodeList.append(H.nodeList[i])
+		myNode.id = H.nodeList[i].id
+		for x in H.nodeList[i].adj_list:
+			if x != myNode.id:
+				myNode.adj_list.append(x)
+		hPrime.nodeList.append(myNode)
+	print("hprime: ")
+	hPrime.PrintGraph()
 	#replace nodes in hPrime with mapping from newMatch[0]
 	for n in range(len(hPrime.nodeList)): #loop thru hPrime's nodeList
 		check = hPrime.nodeList[n]
