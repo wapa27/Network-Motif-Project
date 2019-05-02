@@ -61,7 +61,7 @@ def recursiveSearch(G,H,g,possMatch,IsomorphList):
 		if (possAdd != None):
 			if len(possAdd[1]) == len(H.nodeList):
 				IsomorphList.append(possAdd)
-				print(possAdd)
+				#print(possAdd)
 			else:
 				recursiveSearch(G,H, G.FindNode(n), possAdd, IsomorphList)
 
@@ -77,10 +77,8 @@ def noRep(listy):
 	for f in listy:
 		for s in listy: 
 			if (s != f):
-				print(sorted(f[0]))
-				print(sorted(s[0]))
 				if (sorted(f[0]) == sorted(s[0])):
-					listy.remove(f)
+					listy.remove(s)
 	return listy  
 
 
@@ -90,9 +88,7 @@ def FindSubgraphInstances(G,H):
 	tList = []
 	for g in G.nodeList:
 		tList += IsomorphicExtentions(G,H,g)
-		tList = noRep(tList)
-		print("tlist")
-		print(tList)
+	tList = noRep(tList)
 	Instances += len(tList)
 	#check for repetitions
 	return Instances 
@@ -109,5 +105,5 @@ if __name__ == "__main__":
 	G.PrintGraph()
 	print("Motif: ")
 	H.PrintGraph()
-	
+	print("The number of instances of the motif is: " )
 	print(FindSubgraphInstances(G,H))
