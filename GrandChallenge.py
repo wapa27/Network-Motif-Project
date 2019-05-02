@@ -9,10 +9,7 @@ def gCombat(G, hPrime):
 	return True
 
 def compatible(G, H, toTry, possMatch):
-	print("H: ")
-	H.PrintGraph()
 	hPrime = Graph([])
-	myNode = Node(0, [], 0)
 	newMatch = [[],[]]
 	#make a copy of possMatch using a for loop initialization
 	for i in range(len(possMatch[0])):
@@ -20,15 +17,18 @@ def compatible(G, H, toTry, possMatch):
 		newMatch[1].append(possMatch[1][i])
 	newMatch[0].append(toTry)
 	newMatch[1].append(H.nodeList[len(newMatch[0])-1].id) #len(possMatch)-1 is index of h
-	#print(newMatch[1])
-	#print(newMatch[0])
-	#make a copy of H using a for loop initialization
+
 	for i in range(len(newMatch[1])): #index of node IDs in G
+		myNode = Node(0, [], 0)
 		myNode.id = H.nodeList[i].id
 		for x in H.nodeList[i].adj_list:
 			if x != myNode.id:
 				myNode.adj_list.append(x)
+		print("MyNodId : " + myNode.id)
+		print("MyNodAdj : ")
+		print(myNode.adj_list)
 		hPrime.nodeList.append(myNode)
+
 	print("hprime: ")
 	hPrime.PrintGraph()
 	#replace nodes in hPrime with mapping from newMatch[0]
@@ -103,10 +103,4 @@ if __name__ == "__main__":
 	
 	#G.PrintGraph()
 	#H.PrintGraph()
-	print("H: ")
-	H.PrintGraph()
-	print("--------")
 	print(FindSubgraphInstances(G,H))
-	H.PrintGraph()
-
-
