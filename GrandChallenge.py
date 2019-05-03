@@ -1,3 +1,4 @@
+
 from adjListGraph import *
 
 
@@ -100,8 +101,11 @@ def noRep(listy):
             # print("++++++++++++++++")
             # print("  trying", f[0], s[0])
             if (s != f):
-                tmpf = f[0].copy()
-                tmps = s[0].copy()  # letters and numbers
+                tmpf = []
+                tmps = [] 
+                for i in range(len(f[0])):
+                	tmpf.append(f[0][i])
+                	tmps.append(s[0][i])
                 # if len(f) % 2 == 0:
                 #     x = len(f)/2
                 #     x = int(x)
@@ -158,8 +162,8 @@ def hamilton(G, size, pt, path=[]):
 
 
 if __name__ == "__main__":
-    graph = LoadGraph("test_net1.txt")
-    subgraph = LoadGraph("motif1.txt")
+    graph = LoadGraph("gra.txt")
+    subgraph = LoadGraph("mot.txt")
     H = sortByDegree(subgraph)
     # H.PrintGraph()
     pt = H.nodeList[len(H.nodeList)-1]
