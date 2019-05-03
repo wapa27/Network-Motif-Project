@@ -102,19 +102,27 @@ def noRep(listy):
             if (s != f):
                 tmpf = f[0].copy()
                 tmps = s[0].copy()  # letters and numbers
-                if len(f) % 2 == 0:
-                    x = len(f)/2 + 1
-                    x = int(x)
-                    # print(type(x))
-                if len(f) % 2 != 0:
-                    x = len(f) // 2
-                    x = int(x)
+                # if len(f) % 2 == 0:
+                #     x = len(f)/2
+                #     x = int(x)
+                #     y = len(f) /2 -1
+                #     y =
+                #     # print(type(x))
+                # # if len(f) % 2 != 0:
+                #     # x = len(f) // 2
+                #     x = int(x)
                 x = len(f) // 2
+                x = int(x)
+                y = x - 1
                 if (sorted(tmpf) == sorted(tmps)):
-                    if f[0][x] == s[0][x]:
-                        # print(f[0], s[0])
-                        print("  dont like", (f[0]), (s[0]))
-                        listy.remove(s)
+                    if (len(f[0]) % 2 != 0):
+                        if f[0][x] == s[0][x]:
+                            print("  dont like", (f[0]), (s[0]))
+                            listy.remove(s)
+                    else:
+                        if (f[0][x] == s[0][y]) and (f[0][y] == s[0][x]):
+                            print("  dont like", (f[0]), (s[0]))
+                            listy.remove(s)
 
     # print
     # print("Here is our listy:", listy)
