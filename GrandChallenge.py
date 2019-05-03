@@ -1,8 +1,8 @@
-
+# Code by : Warren Payne, Liz Willie Chew
 from adjListGraph import *
 
 
-def gCompat(G, hPrime):
+def gCompat(G, hPrime): # find out if the adj list of hPrime matches with 
     for n in hPrime.nodeList:
         for a in n.adj_list:
             lst = G.FindNode(n.id).adj_list
@@ -18,6 +18,7 @@ def compatible(G, H, toTry, possMatch):
     for i in range(len(possMatch[0])):
         newMatch[0].append(possMatch[0][i])
         newMatch[1].append(possMatch[1][i])
+    # append the new node that we want to find compatibility
     newMatch[0].append(toTry)
     newMatch[1].append(H.nodeList[len(newMatch[0])-1].id)
 
@@ -29,10 +30,6 @@ def compatible(G, H, toTry, possMatch):
             if x != myNode.id:
                 myNode.adj_list.append(x)
         hPrime.nodeList.append(myNode)
-        # print(newMatch)
-        # print("append", myNode.id, myNode.adj_list)
-        # print("hPrime1:")
-        # hPrime.PrintGraph()
 
     # replace nodes in hPrime with mapping from newMatch[0]
     for n in range(len(hPrime.nodeList)):  # loop thru hPrime's nodeList
@@ -43,26 +40,25 @@ def compatible(G, H, toTry, possMatch):
                 # change node id to mapped value from newMatch[0]
                 check.id = newMatch[0][m]
 
-        # print("hPrime2:")
-        # hPrime.PrintGraph()
+        # loop through the adj list of the check node
         for a in range(len(check.adj_list)):
             mapped = False
-
             for b in range(len(newMatch[1])):
-                # print(check.id, check.adj_list)
                 adjCheck = check.adj_list[a]
-
+                # if a match is found, replace the hPrime representation with the map
                 if adjCheck == newMatch[1][b]:
                     check.adj_list[a] = newMatch[0][b]
                     mapped = True
+            # mark non maps with a '$'
             if mapped == False:
                 check.adj_list[a] = "$"
-                # check.adj_list.pop(a)
+        # remove marked entries
         for z in check.adj_list:
             if(z == "$"):
                 check.adj_list.remove(z)
 
-    # print("trying", newMatch)
+    # find out if the mapped hPrime is a subset of G
+    # if so, the hPrime is a match
     if (gCompat(G, hPrime)):
         return newMatch
     else:
@@ -72,79 +68,52 @@ def compatible(G, H, toTry, possMatch):
 def recursiveSearch(G, H, g, possMatch, IsomorphList):
     for n in g.adj_list:
         if n not in possMatch[0]:
-            # print(" node", n)
             possAdd = compatible(G, H, n, possMatch)
             if (possAdd != None):
                 if len(possAdd[1]) == len(H.nodeList):
                     IsomorphList.append(possAdd)
-                    # print("completed possAdd")
-                    # print completed isomorphism
-                    # print("completed possAdd: ", possAdd)
-
                 else:
                     recursiveSearch(G, H, G.FindNode(n), possAdd, IsomorphList)
 
 
 def IsomorphicExtentions(G, H, g):
     IsomorphList = []  # number of found subgraphs from node g
-    # print(current.id)
-    # G:graph, H:motif, current: node object of int n, g,h[0]: suppose g and h[0] are compatible, IsomorphList: record completed maps
-    toopy = [[g.id], [H.nodeList[0].id]]
+    toopy = [[g.id], [H.nodeList[0].id]] # inital mapping
     recursiveSearch(G, H, g, toopy, IsomorphList)
     return IsomorphList
 
+def FindSubgraphInstances(G, H):
+    Instances = 0  # Final number of subgraphs
+    tList = []
+    # call isomorphic extentions on all nodes in G
+    for g in G.nodeList:
+        tList += IsomorphicExtentions(G, H, g)
+    tList = noRep(tList)
+    Instances += len(tList)
+    # check for repetitions
+    return Instances
+
 
 def noRep(listy):
-    print("WRE SERTING!")
     for f in listy:
         for s in listy:
-            # print("++++++++++++++++")
-            # print("  trying", f[0], s[0])
             if (s != f):
                 tmpf = []
                 tmps = [] 
                 for i in range(len(f[0])):
                 	tmpf.append(f[0][i])
                 	tmps.append(s[0][i])
-                # if len(f) % 2 == 0:
-                #     x = len(f)/2
-                #     x = int(x)
-                #     y = len(f) /2 -1
-                #     y =
-                #     # print(type(x))
-                # # if len(f) % 2 != 0:
-                #     # x = len(f) // 2
-                #     x = int(x)
                 x = len(f) // 2
                 x = int(x)
                 y = x - 1
                 if (sorted(tmpf) == sorted(tmps)):
                     if (len(f[0]) % 2 != 0):
                         if f[0][x] == s[0][x]:
-                            print("  dont like", (f[0]), (s[0]))
                             listy.remove(s)
                     else:
                         if (f[0][x] == s[0][y]) and (f[0][y] == s[0][x]):
-                            print("  dont like", (f[0]), (s[0]))
                             listy.remove(s)
-
-    # print
-    # print("Here is our listy:", listy)
     return listy
-
-
-def FindSubgraphInstances(G, H):
-    Instances = 0  # Final number of subgraphs
-    tList = []
-    for g in G.nodeList:
-        print("id", g.id)
-        tList += IsomorphicExtentions(G, H, g)
-    print(tList)
-    tList = noRep(tList)
-    print(tList)
-    Instances += len(tList)
-    # check for repetitions
-    return Instances
 
 
 def hamilton(G, size, pt, path=[]):
@@ -156,21 +125,23 @@ def hamilton(G, size, pt, path=[]):
             woo = G.FindNode(pt_next)
             res_path = [i for i in path]
             candidate = hamilton(G, size, woo, res_path)
-            if candidate is not None:  # skip loop or dead end
+            if candidate is not None: 
                 return candidate
-    # loop or dead end, None is implicitly returned
+    # do not retrun anything if a hamiltonian path is not found
 
 
 if __name__ == "__main__":
-    graph = LoadGraph("gra.txt")
-    subgraph = LoadGraph("mot.txt")
+    graph = LoadGraph("graoh.txt")
+    subgraph = LoadGraph("motif.txt")
+
+    # order H by a Hamiltonian path 
     H = sortByDegree(subgraph)
-    # H.PrintGraph()
     pt = H.nodeList[len(H.nodeList)-1]
     path = []
     HHam = hamilton(subgraph, len(subgraph.nodeList), pt, path)
     H.nodeList = HHam
-    # H.PrintGraph()
+
+    # sort G by the degrees of the nodes
     G = sortByDegree(graph)
 
     print("Graph: ")
