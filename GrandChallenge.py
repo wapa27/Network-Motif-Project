@@ -28,10 +28,10 @@ def compatible(G, H, toTry, possMatch):
             if x != myNode.id:
                 myNode.adj_list.append(x)
         hPrime.nodeList.append(myNode)
-        print(newMatch)
-        print("append", myNode.id, myNode.adj_list)
-        print("hPrime1:")
-        hPrime.PrintGraph()
+        # print(newMatch)
+        # print("append", myNode.id, myNode.adj_list)
+        # print("hPrime1:")
+        # hPrime.PrintGraph()
 
     # replace nodes in hPrime with mapping from newMatch[0]
     for n in range(len(hPrime.nodeList)):  # loop thru hPrime's nodeList
@@ -42,13 +42,13 @@ def compatible(G, H, toTry, possMatch):
                 # change node id to mapped value from newMatch[0]
                 check.id = newMatch[0][m]
 
-        print("hPrime2:")
-        hPrime.PrintGraph()
+        # print("hPrime2:")
+        # hPrime.PrintGraph()
         for a in range(len(check.adj_list)):
             mapped = False
 
             for b in range(len(newMatch[1])):
-                print(check.id, check.adj_list)
+                # print(check.id, check.adj_list)
                 adjCheck = check.adj_list[a]
 
                 if adjCheck == newMatch[1][b]:
@@ -61,7 +61,7 @@ def compatible(G, H, toTry, possMatch):
             if(z == "$"):
                 check.adj_list.remove(z)
 
-    print("trying", newMatch)
+    # print("trying", newMatch)
     if (gCompat(G, hPrime)):
         return newMatch
     else:
@@ -71,14 +71,14 @@ def compatible(G, H, toTry, possMatch):
 def recursiveSearch(G, H, g, possMatch, IsomorphList):
     for n in g.adj_list:
         if n not in possMatch[0]:
-            print(" node", n)
+            # print(" node", n)
             possAdd = compatible(G, H, n, possMatch)
             if (possAdd != None):
                 if len(possAdd[1]) == len(H.nodeList):
                     IsomorphList.append(possAdd)
                     # print("completed possAdd")
                     # print completed isomorphism
-                    print("completed possAdd: ", possAdd)
+                    # print("completed possAdd: ", possAdd)
 
                 else:
                     recursiveSearch(G, H, G.FindNode(n), possAdd, IsomorphList)
@@ -97,14 +97,27 @@ def noRep(listy):
     print("WRE SERTING!")
     for f in listy:
         for s in listy:
-            print("++++++++++++++++")
-            print("  trying", f[0], s[0])
+            # print("++++++++++++++++")
+            # print("  trying", f[0], s[0])
             if (s != f):
-                if (sorted(f[0]) == sorted(s[0])):
-                    print("  dont like", sorted(f[0]), sorted(s[0]))
-                    listy.remove(s)
+                tmpf = f[0].copy()
+                tmps = s[0].copy()  # letters and numbers
+                if len(f) % 2 == 0:
+                    x = len(f)/2 + 1
+                    x = int(x)
+                    # print(type(x))
+                if len(f) % 2 != 0:
+                    x = len(f) // 2
+                    x = int(x)
+                x = len(f) // 2
+                if (sorted(tmpf) == sorted(tmps)):
+                    if f[0][x] == s[0][x]:
+                        # print(f[0], s[0])
+                        print("  dont like", (f[0]), (s[0]))
+                        listy.remove(s)
+
     # print
-    print("Here is our listy:", listy)
+    # print("Here is our listy:", listy)
     return listy
 
 
@@ -116,6 +129,7 @@ def FindSubgraphInstances(G, H):
         tList += IsomorphicExtentions(G, H, g)
     print(tList)
     tList = noRep(tList)
+    print(tList)
     Instances += len(tList)
     # check for repetitions
     return Instances
@@ -139,12 +153,12 @@ if __name__ == "__main__":
     graph = LoadGraph("test_net1.txt")
     subgraph = LoadGraph("motif1.txt")
     H = sortByDegree(subgraph)
-    H.PrintGraph()
+    # H.PrintGraph()
     pt = H.nodeList[len(H.nodeList)-1]
     path = []
     HHam = hamilton(subgraph, len(subgraph.nodeList), pt, path)
     H.nodeList = HHam
-    H.PrintGraph()
+    # H.PrintGraph()
     G = sortByDegree(graph)
 
     print("Graph: ")
